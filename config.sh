@@ -135,6 +135,32 @@ if [[ "$kiwi_profiles" != *"Container"* ]] && [[ "$kiwi_profiles" != *"FEX"* ]];
 fi
 
 #======================================
+# SDM845 Hacks
+#--------------------------------------
+if [[ "$kiwi_profiles" == *"SDM845"* ]]; then
+	systemctl set-default graphical.target
+
+	# Repart is segfaulting, so disable it
+	rm -rf /etc/repart.d/*.conf
+
+	# Change root password and add user account. Password is 147147 for both
+	echo 'root:147147' | chpasswd
+	groupadd -g 1000 user && \
+		useradd -g 1000 -G wheel -m -u 1000 user && \
+		echo 'user:147147' | chpasswd
+
+	for i in phrog bootmac-bluetooth hexagonrpcd-sdsp pd-mapper rmtfs tqftpserv; do
+		systemctl enable ${i}.service
+	done
+
+	# Add hexagonrpc config, so that sensor hardware drivers will know where to get
+	# firmware from to initialize hardware.
+	mkdir -p /usr/share/hexagonrpcd/
+	echo 'hexagonrpcd_fw_dir="/usr/share/qcom/sdm845/OnePlus/oneplus6"' > /usr/share/hexagonrpcd/hexagonrpcd-sdsp.conf
+fi
+
+
+#======================================
 # Setup default customizations
 #--------------------------------------
 
