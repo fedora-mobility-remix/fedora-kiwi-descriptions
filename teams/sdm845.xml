@@ -46,7 +46,15 @@
 		<package name="btrfs-progs"/>
 		<package name="udisks2-btrfs"/>
 
-		<ignore name="*-firmware"/>
+		<ignore name="amd-*-firmware"/>
+		<ignore name="brcmfmac-firmware"/>
+		<ignore name="cirrus-audio-firmware"/>
+		<ignore name="intel-*-firmware"/>
+		<ignore name="mt7xxx-firmware"/>
+		<ignore name="nvidia-*-firmware"/>
+		<ignore name="nxpwireless-firmware"/>
+		<ignore name="realtek-firmware"/>
+		<ignore name="tiwilink-firmware"/>
 	</packages>
 
 	<packages type="image" profiles="SDM845">
@@ -62,6 +70,7 @@
 		<package name="rmtfs"/>
 		<package name="tqftpserv"/>
 		<package name="alsa-ucm-mobility-sdm845"/>
+		<package name="qcom-firmware"/>
 
 		<!-- Mobility tweaks -->
 		<package name="mobility-tweaks"/>
