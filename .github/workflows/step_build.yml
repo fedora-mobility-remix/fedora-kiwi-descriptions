@@ -77,6 +77,9 @@ jobs:
           sudo mv rootfs/usr/lib/firmware/postmarketos/* rootfs/usr/lib/firmware/updates
           sudo rmdir rootfs/usr/lib/firmware/postmarketos
 
+          # Clean out libdnf5 cache (800M+)
+          rm -rf rootfs/var/cache/libdnf5/*
+
           sudo umount rootfs
 
           gzip artifacts/*
