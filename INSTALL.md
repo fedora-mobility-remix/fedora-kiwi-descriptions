@@ -23,6 +23,8 @@ cd artifacts
 ### flash uboot
 
 ```sh
+fastboot erase dtbo_a
+fastboot erase dtbo_b
 fastboot flash boot uboot-sdm845-oneplus-*.img --slot=all
 fastboot reboot
 ```
@@ -40,10 +42,10 @@ lsblk -o NAME,PARTLABEL | grep -E 'op2|system|userdata'
 here is output i got on my device:
 
 ```sh
-├─sdb7  op2
-├─sdb13 system_a
-├─sdb14 system_b
-└─sdb17 userdata
+├─sda7  op2
+├─sda13 system_a
+├─sda14 system_b
+└─sda17 userdata
 ```
 
 ### writing fedora on oneplus with dd
@@ -54,10 +56,10 @@ here is output i got on my device:
 - root.raw -> userdata
 
 ```sh
-sudo dd if=esp.raw  of=/dev/sdb7  bs=4M status=progress
-sudo dd if=boot.raw of=/dev/sdb13 bs=4M status=progress
-sudo dd if=boot.raw of=/dev/sdb14 bs=4M status=progress
-sudo dd if=root.raw of=/dev/sdb17 bs=4M status=progress
+sudo dd if=esp.raw  of=/dev/sda7  bs=4M status=progress
+sudo dd if=boot.raw of=/dev/sda13 bs=4M status=progress
+sudo dd if=boot.raw of=/dev/sda14 bs=4M status=progress
+sudo dd if=root.raw of=/dev/sda17 bs=4M status=progress
 sync
 ```
 
